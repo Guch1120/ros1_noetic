@@ -1,5 +1,7 @@
 #!/bin/bash
 source /opt/ros/noetic/setup.bash
-roscore &
-sleep 2
-exec "$@"
+
+terminator --nwe-tab --command "roscore" --layout=default &
+terminator --nwe-tab --command "bash" --layout=default &
+terminator --nwe-tab --command "bash" --layout=default &
+
