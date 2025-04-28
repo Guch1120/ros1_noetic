@@ -1,9 +1,12 @@
 FROM ros:noetic
+ 
+ENV DEBIAN_FRONTEND=noninteractive
 
 # 基本ツールのインストール
 RUN apt-get update && apt-get install -y \
     git \
     wget \
+    nano \
     curl \
     lsb-release \
     sudo \
@@ -13,6 +16,7 @@ RUN apt-get update && apt-get install -y \
     ros-noetic-rviz \
     ros-noetic-gazebo-ros-pkgs \
     ros-noetic-gazebo-ros-control \
+    terminator \
     && rm -rf /var/lib/apt/lists/*
 
 # ユーザー作成
@@ -27,6 +31,9 @@ RUN mkdir -p /dev/bus/usb
 # entrypoint.sh をコンテナ内にコピー＆実行可能化
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
+
+# terminatorの設定ファイルをコピー
+COPY terminator_config /home/dockeruser/.config/terminator/config
 
 # dockeruser に切り替え
 USER dockeruser
