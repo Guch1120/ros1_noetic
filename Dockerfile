@@ -34,6 +34,7 @@ RUN chmod +x /entrypoint.sh
 
 # terminatorの設定ファイルをコピー
 COPY terminator_config /home/dockeruser/.config/terminator/config
+RUN chown -R dockeruser:dockeruser /home/dockeruser/.config
 
 # dockeruser に切り替え
 USER dockeruser
@@ -46,4 +47,4 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 
 # エントリーポイント
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["bash"]
+CMD ["/bin/bash", "-c", "/entrypoint.sh"]
