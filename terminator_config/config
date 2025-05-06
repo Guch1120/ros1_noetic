@@ -1,0 +1,44 @@
+[global_config]
+ title_transmit_bg_color = "#d30102"
+ title_recieve_bg_color = "#00ff00"
+
+[keybindings]
+
+[layouts]
+ [[default]]
+  [[[child0]]]
+   parent = splitter1
+   type = Terminal
+   command = bash /home/dockeruser/scripts/launch_0.bash
+  [[[child1]]]
+   parent = splitter1
+   type = Terminal
+   command = bash /home/dockeruser/scripts/launch_1.bash
+  [[[child2]]]
+   parent = splitter2
+   type = Terminal
+   command = bash /home/dockeruser/scripts/launch_2.bash
+  [[[child3]]]
+   parent = splitter2
+   type = Terminal
+   command = bash /home/dockeruser/scripts/launch_3.bash
+  
+  [[[splitter1]]]
+   parent = splitter_main
+   type = VPaned
+  [[[splitter2]]]
+   parent = splitter_main
+   type = VPaned
+  [[[splitter_main]]]
+   parent = window0
+   type = HPaned
+
+  [[[window0]]]
+   parent = ""
+   type = Window
+#   size = 1000,800
+#   position = 50,50
+   title = ros1-noetic-dev
+   maximized = False
+
+[plugins]

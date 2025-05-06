@@ -33,8 +33,15 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # terminatorの設定ファイルをコピー
-COPY terminator_config /home/dockeruser/.config/terminator/config
-RUN chown -R dockeruser:dockeruser /home/dockeruser/.config
+COPY terminator_config /home/dockeruser/.config/terminator
+COPY terminator_config /home/dockeruser/terminator_config
+RUN chown -R dockeruser:dockeruser /home/dockeruser/terminator_config
+#RUN chown -R dockeruser:dockeruser /home/dockeruser/.config
+
+# dockeruserのホームにスクリプトをコピー
+COPY scripts/ /home/dockeruser/scripts/
+RUN chmod +x /home/dockeruser/scripts/*.bash && \
+    chown -R dockeruser:dockeruser /home/dockeruser/scripts
 
 # dockeruser に切り替え
 USER dockeruser
