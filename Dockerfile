@@ -17,7 +17,8 @@ RUN apt-get update && apt-get install -y \
     ros-noetic-gazebo-ros-pkgs \
     ros-noetic-gazebo-ros-control \
     terminator \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && apt update
 
 # ユーザー作成
 RUN useradd -m -s /bin/bash dockeruser && echo "dockeruser:docker" | chpasswd && adduser dockeruser sudo
@@ -33,9 +34,9 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # terminatorの設定ファイルをコピー
-COPY terminator_config /home/dockeruser/.config/terminator
-COPY terminator_config /home/dockeruser/terminator_config
-RUN chown -R dockeruser:dockeruser /home/dockeruser/terminator_config
+# COPY terminator_config /home/dockeruser/.config/terminator
+# COPY terminator_config /home/dockeruser/terminator_config
+# RUN chown -R dockeruser:dockeruser /home/dockeruser/terminator_config
 #RUN chown -R dockeruser:dockeruser /home/dockeruser/.config
 
 # dockeruserのホームにスクリプトをコピー

@@ -18,7 +18,7 @@ sleep 2
 # terminator起動（もし既に動いてたら起動しない）
 if ! pgrep -x "terminator" > /dev/null; then
  # terminator起動（dockeruserとして）
- terminator -m -l default &
+ terminator -m -l default --config /home/dockeruser/terminator_config/config &
 else
   echo "terminator is already running."
 fi

@@ -19,16 +19,24 @@
    type = Terminal
    command = bash /home/dockeruser/scripts/launch_2.bash
   [[[child3]]]
-   parent = splitter2
+   parent = splitter3
    type = Terminal
    command = bash /home/dockeruser/scripts/launch_3.bash
-  
+  [[[child4]]]
+   parent = splitter3
+   type = Terminal
+   command = bash /home/dockeruser/scripts/launch_4.bash
+
   [[[splitter1]]]
    parent = splitter_main
    type = VPaned
   [[[splitter2]]]
    parent = splitter_main
    type = VPaned
+  [[[splitter3]]]
+   parent = splitter2
+   type = VPaned
+
   [[[splitter_main]]]
    parent = window0
    type = HPaned
@@ -36,8 +44,6 @@
   [[[window0]]]
    parent = ""
    type = Window
-#   size = 1000,800
-#   position = 50,50
    title = ros1-noetic-dev
    maximized = False
 
