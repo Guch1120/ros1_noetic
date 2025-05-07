@@ -1,15 +1,28 @@
 #!/bin/bash
+set -e
+
+# ROSセットアップ
 source /opt/ros/noetic/setup.bash
 
-# terminatorは起動しない（まずはシンプルに確認する）
-echo "起動しました！"
+# terminatorの設定ファイルをコピー（初回だけ）
+mkdir -p ~/.config/terminator/
+if ! cmp -s /home/dockeruser/terminator_config/config ~/.config/terminator/config; then
+ cp /home/dockeruser/terminator_config/config ~/.config/terminator/config
+ chown dockeruser:dockeruser ~/.config/terminator/config
+fi
 
-roscore > /tmp/roscore.log 2>&1 &
+# roscore起動（バックグラウンド）
+roscore &
 sleep 2
 
-for i in {1..5}; do
- if rostopic list > /dev/null 2>&1; then
-  echo "roscore "
+# terminator起動（もし既に動いてたら起動しない）
+if ! pgrep -x "terminator" > /dev/null; then
+ # terminator起動（dockeruserとして）
+ terminator -m -l default &
+else
+  echo "terminator is already running."
+fi
 
-# 最後に必ずbashを実行
-exec bash -l
+# bashを起動し続ける
+exec bash
+
