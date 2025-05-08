@@ -19,7 +19,9 @@ RUN apt-get update && apt-get install -y \
     ros-noetic-gazebo-ros-control \
     terminator \
     tree \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && apt update -y \
+    && apt-get clean
 
 RUN apt update -y
 
@@ -37,9 +39,9 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # terminatorの設定ファイルをコピー
-COPY terminator_config /home/dockeruser/.config/terminator
-COPY terminator_config /home/dockeruser/terminator_config
-RUN chown -R dockeruser:dockeruser /home/dockeruser/terminator_config
+# COPY terminator_config /home/dockeruser/.config/terminator
+# COPY terminator_config /home/dockeruser/terminator_config
+# RUN chown -R dockeruser:dockeruser /home/dockeruser/terminator_config
 #RUN chown -R dockeruser:dockeruser /home/dockeruser/.config
 
 # dockeruserのホームにスクリプトをコピー
