@@ -23,7 +23,7 @@ else
         --env="ROS_HOSTNAME=${ROS_HOSTNAME}" \
         --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
         --volume="$(pwd)/scripts:/home/dockeruser/scripts:rw" \
-        --volume="$(pwd)/terminator_config:/home/dockeruser/.config/terminator:rw" \
+        --volume="$(pwd)/terminator_config:/home/dockeruser/terminator_config:rw" \
         --privileged \
         ros1-noetic-gui
 fi
