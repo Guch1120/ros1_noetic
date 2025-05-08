@@ -1,3 +1,3 @@
 #!/bin/bash
-echo "yakiniku"
+echo "3"
 exec bash
