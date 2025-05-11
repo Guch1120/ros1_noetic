@@ -6,9 +6,10 @@ source /opt/ros/noetic/setup.bash
 
 # terminatorの設定ファイルをコピー（初回だけ）
 mkdir -p ~/.config/terminator/
+
 if ! cmp -s /home/dockeruser/terminator_config/config ~/.config/terminator/config; then
- cp /home/dockeruser/terminator_config/config ~/.config/terminator/config
- chown dockeruser:dockeruser ~/.config/terminator/config
+  cp /home/dockeruser/terminator_config/config ~/.config/terminator/config
+  chown dockeruser:dockeruser ~/.config/terminator/config
 fi
 
 # roscore起動（バックグラウンド）

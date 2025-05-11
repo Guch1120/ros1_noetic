@@ -1,3 +1,3 @@
 #!/bin/bash
-echo "ponpoko "
+echo "4"
 exec bash

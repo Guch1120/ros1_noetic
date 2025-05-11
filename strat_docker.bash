@@ -9,12 +9,13 @@ export ROS_HOSTNAME=$(hostname)
 
 # === 2. コンテナ存在チェック ===
 if docker ps -a --format '{{.Names}}' | grep -q "^${CONTAINER_NAME}$"; then
-    echo "コンテナが存在します。起動してアタッチします。"
+    echo "コンテナが存在。起動してアタッチ"
     docker start -i ${CONTAINER_NAME}
 else
-    echo "コンテナが存在しません。新しく作成して起動します。"
+    echo "コンテナが存在しません。新しく作成して起動"
     docker run -it \
 	--gpus all \
+        --name ${CONTAINER_NAME} \
         --net=host \
         --env="DISPLAY=${DISPLAY}" \
         --env="QT_X11_NO_MITSHM=1" \
@@ -24,6 +25,5 @@ else
         --volume="$(pwd)/scripts:/home/dockeruser/scripts:rw" \
         --volume="$(pwd)/terminator_config:/home/dockeruser/terminator_config:rw" \
         --privileged \
-        --name ${CONTAINER_NAME} \
         ros1-noetic-gui
 fi

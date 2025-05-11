@@ -1,50 +1,51 @@
 [global_config]
- title_transmit_bg_color = "#d30102"
- title_recieve_bg_color = "#00ff00"
-
+   title_transmit_bg_color = "#d30102"
 [keybindings]
-
+[profiles]
+   [[default]]
+   cursor_color = "#aaaaaa"
 [layouts]
- [[default]]
-  [[[child0]]]
-   parent = splitter1
-   type = Terminal
-   command = bash /home/dockeruser/scripts/launch_0.bash
-  [[[child1]]]
-   parent = splitter1
-   type = Terminal
-   command = bash /home/dockeruser/scripts/launch_1.bash
-  [[[child2]]]
-   parent = splitter2
-   type = Terminal
-   command = bash /home/dockeruser/scripts/launch_2.bash
-  [[[child3]]]
-   parent = splitter3
-   type = Terminal
-   command = bash /home/dockeruser/scripts/launch_3.bash
-  [[[child4]]]
-   parent = splitter3
-   type = Terminal
-   command = bash /home/dockeruser/scripts/launch_4.bash
-
-  [[[splitter1]]]
-   parent = splitter_main
-   type = VPaned
-  [[[splitter2]]]
-   parent = splitter_main
-   type = VPaned
-  [[[splitter3]]]
-   parent = splitter2
-   type = VPaned
-
-  [[[splitter_main]]]
-   parent = window0
-   type = HPaned
-
-  [[[window0]]]
-   parent = ""
-   type = Window
-   title = ros1-noetic-dev
-   maximized = False
-
+   [[default]]
+   [[[child0]]]
+      parent = splitter1
+      type = Terminal
+      command = bash /home/dockeruser/scripts/launch_0.bash
+   [[[child1]]]
+      parent = splitter1
+      type = Terminal
+      command = bash /home/dockeruser/scripts/launch_1.bash
+   [[[child2]]]
+      parent = splitter2
+      type = Terminal
+      command = bash /home/dockeruser/scripts/launch_2.bash
+      profile = default
+   [[[child3]]]
+      parent = splitter3
+      type = Terminal
+      command = bash /home/dockeruser/scripts/launch_3.bash
+   [[[child4]]]
+      parent = splitter3
+      type = Terminal
+      command = bash /home/dockeruser/scripts/launch_4.bash
+   
+   
+   [[[splitter1]]]
+      parent = splitter_main
+      type = VPaned
+   [[[splitter2]]]
+      parent = splitter_main
+      type = VPaned
+   [[[splitter3]]]
+      parent = splitter2
+      type = VPaned
+   
+   [[[splitter_main]]]
+      parent = window0
+      type = HPaned
+   
+   [[[window0]]]
+      parent = ""
+      type = Window
+      title = ros1-noetic-dev
+      maximized = False
 [plugins]

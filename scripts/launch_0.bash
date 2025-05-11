@@ -1,4 +1,4 @@
 #!/bin/bash
-echo "Window X launched"
+echo "0"
 exec bash
 

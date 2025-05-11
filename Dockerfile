@@ -2,6 +2,7 @@ FROM ros:noetic
  
 ENV DEBIAN_FRONTEND=noninteractive
 
+ENV DEBIAN_FRONTEND=noninteractive
 # 基本ツールのインストール
 RUN apt-get update && apt-get install -y \
     git \
@@ -21,7 +22,11 @@ RUN apt-get update && apt-get install -y \
     ros-noetic-rqt-tf-tree \
     ros-noetic-tf-conversions \ 
     terminator \
+    tree \
     && rm -rf /var/lib/apt/lists/* \
+    && apt update -y \
+    && apt-get clean \
+    && apt update -y \
     && apt update
 
 # ユーザー作成
@@ -36,12 +41,6 @@ RUN mkdir -p /dev/bus/usb
 # entrypoint.sh をコンテナ内にコピー＆実行可能化
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
-
-# terminatorの設定ファイルをコピー
-# COPY terminator_config /home/dockeruser/.config/terminator
-# COPY terminator_config /home/dockeruser/terminator_config
-# RUN chown -R dockeruser:dockeruser /home/dockeruser/terminator_config
-#RUN chown -R dockeruser:dockeruser /home/dockeruser/.config
 
 # dockeruserのホームにスクリプトをコピー
 COPY scripts/ /home/dockeruser/scripts/
