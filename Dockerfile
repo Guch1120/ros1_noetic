@@ -16,6 +16,10 @@ RUN apt-get update && apt-get install -y \
     ros-noetic-rviz \
     ros-noetic-gazebo-ros-pkgs \
     ros-noetic-gazebo-ros-control \
+    ros-noetic-rqt \
+    ros-noetic-rqt-common-plugins \
+    ros-noetic-rqt-tf-tree \
+    ros-noetic-tf-conversions \ 
     terminator \
     && rm -rf /var/lib/apt/lists/* \
     && apt update
