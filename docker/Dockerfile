@@ -18,7 +18,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     tree \
     x11-apps \
     dbus-x11 \
-    # インストール後のお掃除
+    libcanberra-gtk3-module \ 
+    gir1.2-keybinder-3.0 \   
+    gir1.2-notify-0.7 \       
+    at-spi2-core \          
+    librsvg2-common \
+    adwaita-icon-theme-full \
+    yaru-theme-icon \   
     && rm -rf /var/lib/apt/lists/*
 
 # コンテナ内で作業するユーザーを作成

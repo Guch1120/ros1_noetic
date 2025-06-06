@@ -5,8 +5,8 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
-    image: ros2_humble_dev_image
-    container_name: ros2_humble_container
+    image: ros2_humble_dev_image_fix_dev
+    container_name: ros2_humble_container_fix_dev
     # ttyとstdin_openをtrueにして、コンテナを起動し続けて対話的に使えるようにする
     tty: true
     stdin_open: true
