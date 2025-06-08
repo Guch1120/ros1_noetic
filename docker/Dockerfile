@@ -30,6 +30,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-humble-gazebo-* \
     ros-humble-rqt-* \
     ros-humble-nav2-behavior-tree \
+    fonts-liberation \
+    libasound2 \
+    libatk-bridge2.0-0 \
+    libgbm1 \
+    libpango1.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
 # rosdepの更新処理のみ行う
