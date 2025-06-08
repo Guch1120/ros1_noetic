@@ -1,3 +1,3 @@
 #!/bin/bash
-echo "2  "
+echo "This is launch_2.bash"
 exec bash

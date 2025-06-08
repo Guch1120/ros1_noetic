@@ -4,6 +4,10 @@ set -e
 # ROS2 Humbleの環境設定を読み込む
 source /opt/ros/humble/setup.bash
 
+if [ -f "/opt/ros2_ws/install/setup.bash" ]; then
+  source /opt/ros2_ws/install/setup.bash
+fi
+
 # terminatorの設定ファイルがあればコピーする
 if [ -f "/home/dockeruser/terminator_config/config" ]; then
   cp /home/dockeruser/terminator_config/config /home/dockeruser/.config/terminator/config
