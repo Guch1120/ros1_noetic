@@ -35,6 +35,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libatk-bridge2.0-0 \
     libgbm1 \
     libpango1.0-0 \
+    tar \
     && rm -rf /var/lib/apt/lists/*
 
 # rosdepの更新処理のみ行う
@@ -56,23 +57,15 @@ WORKDIR /opt/ros2_ws
 
 # 依存関係のインストール、ビルド、そしてnwjsの手動インストール
 RUN ["/bin/bash", "-c", \
-    "set -e && \
+    "set -ex && \
     apt-get update && \
     . /opt/ros/humble/setup.bash && \
-    cd /opt/ros2_ws && \
     rosdep install --from-paths src --ignore-src -r -y --skip-keys \"actionlib genpy catkin rospack rostest flexbe_app flexbe_behavior_engine flexbe_input flexbe_mirror flexbe_msgs flexbe_onboard flexbe_states flexbe_testing flexbe_widget\" && \
     colcon build --symlink-install && \
     . install/setup.bash && \
-    cd /tmp && \
-    NWJS_VERSION=v0.75.1 && \
-    NWJS_FILENAME=nwjs-sdk-${NWJS_VERSION}-linux-x64 && \
-    wget https://dl.nwjs.io/${NWJS_VERSION}/${NWJS_FILENAME}.tar.gz && \
-    tar -xzf ${NWJS_FILENAME}.tar.gz && \
-    # ↓ ディレクトリを先に作るのを忘れてたから、この一行を追加するよ
-    mkdir -p /opt/ros2_ws/install/flexbe_app/lib/flexbe_app/nwjs && \
-    mv ${NWJS_FILENAME}/* /opt/ros2_ws/install/flexbe_app/lib/flexbe_app/nwjs/ && \
-    chown -R 1000:1000 /opt/ros2_ws/install/flexbe_app/lib/flexbe_app/nwjs && \
-    rm -rf /tmp/*" \
+    echo '########## nwjsの正規インストールを開始します ##########' && \
+    ros2 run flexbe_app nwjs_install && \
+    echo '########## nwjsのインストールが完了しました ##########' " \
 ]
 
 # === ユーザー設定 ===
