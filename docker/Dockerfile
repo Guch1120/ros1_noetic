@@ -36,6 +36,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgbm1 \
     libpango1.0-0 \
     tar \
+    libgtk-3-0 \
+    libasound2 \
+    libnss3 \
+    libxss1 \
+    libxcomposite1 \
+    libxrandr2 \
+    libatk1.0-0 \
+    libatspi2.0-0 \
+    libxdamage1 \
+    libx11-xcb1 \
+    libxcb-dri3-0 \
     && rm -rf /var/lib/apt/lists/*
 
 # rosdepの更新処理のみ行う
@@ -63,9 +74,15 @@ RUN ["/bin/bash", "-c", \
     rosdep install --from-paths src --ignore-src -r -y --skip-keys \"actionlib genpy catkin rospack rostest flexbe_app flexbe_behavior_engine flexbe_input flexbe_mirror flexbe_msgs flexbe_onboard flexbe_states flexbe_testing flexbe_widget\" && \
     colcon build --symlink-install && \
     . install/setup.bash && \
-    echo '########## nwjsの正規インストールを開始します ##########' && \
-    ros2 run flexbe_app nwjs_install && \
-    echo '########## nwjsのインストールが完了しました ##########' " \
+    cd /tmp && \
+    NWJS_VERSION=v0.83.0 && \
+    NWJS_FILENAME=nwjs-sdk-${NWJS_VERSION}-linux-x64 && \
+    wget https://dl.nwjs.io/${NWJS_VERSION}/${NWJS_FILENAME}.tar.gz && \
+    tar -xzf ${NWJS_FILENAME}.tar.gz && \
+    mkdir -p /opt/ros2_ws/install/flexbe_app/lib/flexbe_app/nwjs && \
+    mv ${NWJS_FILENAME}/* /opt/ros2_ws/install/flexbe_app/lib/flexbe_app/nwjs/ && \
+    chown -R 1000:1000 /opt/ros2_ws/install/flexbe_app/lib/flexbe_app/nwjs && \
+    rm -rf /tmp/*" \
 ]
 
 # === ユーザー設定 ===

@@ -6,11 +6,16 @@ services:
       context: .
       dockerfile: ./docker/Dockerfile
     image: ros2_humble_flexbe_dev_image_fix_dev
-    container_name: ros2_humble_container_fix_dev
+    container_name: ros2_humble_dev_image
+    # image: ros2_humble_container_fix_dev
+    # container_name: ros2_humble_dev_container
     # ttyとstdin_openをtrueにして、コンテナを起動し続けて対話的に使えるようにする
     tty: true
     stdin_open: true
     shm_size: 2gb
+    # security_opt:
+    #   - seccomp:unconfined
+    # privileged: true
     # ボリュームマウント
     volumes:
       # ホストのsrcディレクトリをコンテナのワークスペースのsrcにマウント

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+echo "yakiniku" | sudo -S service dbus start 2>/dev/null
+
 # ROS2 Humbleの環境設定を読み込む
 source /opt/ros/humble/setup.bash
 
