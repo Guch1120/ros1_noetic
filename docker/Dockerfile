@@ -31,6 +31,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN rm -f /etc/ros/rosdep/sources.list.d/20-default.list && rosdep init && rosdep update
 
 RUN useradd -m -s /bin/bash dockeruser && echo "dockeruser:yakiniku" | chpasswd && adduser dockeruser sudo
+RUN groupadd -g 110 render || true && usermod -aG video,render dockeruser
 USER dockeruser
 WORKDIR /home/dockeruser
 
