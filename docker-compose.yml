@@ -12,10 +12,10 @@ services:
     # ttyとstdin_openをtrueにして、コンテナを起動し続けて対話的に使えるようにする
     tty: true
     stdin_open: true
-    shm_size: 2gb
+    # shm_size: 2gb
     # security_opt:
     #   - seccomp:unconfined
-    # privileged: true
+    privileged: true
     # ボリュームマウント
     volumes:
       # ホストのsrcディレクトリをコンテナのワークスペースのsrcにマウント
