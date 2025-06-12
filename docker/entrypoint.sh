@@ -16,9 +16,17 @@ fi
 
 # dbus-run-session を使って、クリーンなD-Busセッションを開始し、
 # その中でterminatorと、コンテナのメインコマンドを実行する
-exec dbus-run-session -- bash -c '
-  set -e
-  terminator &
-  sleep 1
-  exec "$@"
-'
+# exec dbus-run-session -- bash -c '
+#   set -e
+#   terminator &
+#   sleep 1
+#   exec "$@"
+# '
+
+if ! pgrep -x "terminator" > /dev/null; then
+  # terminatorをバックグラウンドで起動
+  dbus-launch terminator &
+else
+  echo "terminator is already running."
+fi
+exec "$@"

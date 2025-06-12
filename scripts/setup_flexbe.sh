@@ -51,4 +51,10 @@ source $WS_DIR/install/setup.bash
 ros2 run flexbe_app nwjs_install
 
 echo "--- セットアップが完了しました！ ---"
-echo "次のコマンドで環境設定を読み込んでください: source ~/ros2_ws/install/setup.bash"
+echo "FlexBEワークスペースは $WS_DIR にあります。"
+
+# --- 5. 環境変数の設定 ---
+echo "--- 5. Setting up environment variables ---"
+echo "source $WS_DIR/install/setup.bash ->
+export XDG_CONFIG_HOME=/tmp/.chromium ->
+export XDG_CACHE_HOME=/tmp/.chromium"
