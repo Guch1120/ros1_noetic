@@ -29,13 +29,7 @@ services:
       - ./scripts:/home/dockeruser/scripts
       # D-Busソケットを共有
       - /var/run/dbus:/var/run/dbus
-      # /dev/dri はNVIDIA環境では不要なのでコメントアウト
-      # - /dev/dri:/dev/dri
 
-    # group_add はNVIDIA環境では不要なのでコメントアウト
-    # group_add:
-    #   - "44"
-    #   - "110"
 
     environment:
       - DISPLAY=${DISPLAY}
@@ -46,11 +40,3 @@ services:
       - __GLX_VENDOR_LIBRARY_NAME=nvidia
 
     network_mode: host
-
-    # 'deploy' セクションは削除する
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices:
-    #         - driver: nvidia
-    #           capabilities: [all]

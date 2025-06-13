@@ -14,14 +14,6 @@ if [ -f "/home/dockeruser/terminator_config/config" ]; then
   chown dockeruser:dockeruser /home/dockeruser/.config/terminator/config
 fi
 
-# dbus-run-session を使って、クリーンなD-Busセッションを開始し、
-# その中でterminatorと、コンテナのメインコマンドを実行する
-# exec dbus-run-session -- bash -c '
-#   set -e
-#   terminator &
-#   sleep 1
-#   exec "$@"
-# '
 
 if ! pgrep -x "terminator" > /dev/null; then
   # terminatorをバックグラウンドで起動
