@@ -54,7 +54,16 @@ echo "--- セットアップが完了しました！ ---"
 echo "FlexBEワークスペースは $WS_DIR にあります。"
 
 # --- 5. 環境変数の設定 ---　#要改良　bashでは反映されず結局現在は手動で打ち込んでいる
-echo "--- 5. Setting up environment variables ---"
-echo "source $WS_DIR/install/setup.bash ->
-export XDG_CONFIG_HOME=/tmp/.chromium ->
-export XDG_CACHE_HOME=/tmp/.chromium"
+echo "--- 5. 環境変数を設定します ---"
+# 以下の環境変数をこのスクリプトのセッションに設定します。
+# これらはFlexBEの実行に必要です。
+# source "$WS_DIR/install/setup.bash"
+# export XDG_CONFIG_HOME=/tmp/.chromium
+# export XDG_CACHE_HOME=/tmp/.chromium
+
+echo "FlexBE用の環境変数が現在のスクリプトセッションに設定されました。"
+echo "新しいターミナルで永続的にこれらの設定を使用するには、以下を ~/.bashrc に追加してください:"
+echo "  echo \"source $WS_DIR/install/setup.bash\" >> ~/.bashrc"
+echo "  echo \"export XDG_CONFIG_HOME=/tmp/.chromium\" >> ~/.bashrc"
+echo "  echo \"export XDG_CACHE_HOME=/tmp/.chromium\" >> ~/.bashrc"
+echo "その後、'source ~/.bashrc' を実行するか、新しいターミナルを開いてください。"

@@ -7,41 +7,46 @@ services:
       dockerfile: ./docker/Dockerfile
     image: ros2_humble_flexbe_dev_image_fix_dev
     container_name: ros2_humble_dev_image
-    # image: ros2_humble_container_fix_dev
-    # container_name: ros2_humble_dev_container
-    # ttyとstdin_openをtrueにして、コンテナを起動し続けて対話的に使えるようにする
     tty: true
     stdin_open: true
-    # shm_size: 2gb
-    # security_opt:
-    #   - seccomp:unconfined
-    privileged: true
-    # ボリュームマウント
+    ipc: host
+
+    # NVIDIA GPU を使うための現在の推奨設定
+    runtime: nvidia
+
     volumes:
       # ホストのsrcディレクトリをコンテナのワークスペースのsrcにマウント
       - ./src:/home/dockeruser/ros2_ws/src
       # X11 Forwarding (GUI表示) の設定
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      #terminalの設定
+      # terminalの設定
       - ./terminator_config:/home/dockeruser/.config/terminator
-      #terminator実行時スクリプトの設定
+      # terminator実行時スクリプトの設定
       - ./scripts:/home/dockeruser/scripts
-      - /var/run/dubs:/var/run/dubs
-    # 環境変数
+      # D-Busソケットを共有
+      - /var/run/dbus:/var/run/dbus
+      # /dev/dri はNVIDIA環境では不要なのでコメントアウト
+      # - /dev/dri:/dev/dri
+
+    # group_add はNVIDIA環境では不要なのでコメントアウト
+    # group_add:
+    #   - "44"
+    #   - "110"
+
     environment:
       - DISPLAY=${DISPLAY}
       - QT_X11_NO_MITSHM=1
-      # GPUに正しくアクセスするための環境変数を追加
+      # runtime: nvidia を使えば以下の2つは自動で設定されることが多い
       - NVIDIA_VISIBLE_DEVICES=all
       - NVIDIA_DRIVER_CAPABILITIES=all
+      - __GLX_VENDOR_LIBRARY_NAME=nvidia
 
-    # ホストのネットワークをそのまま使う設定。ROSの通信が楽になる。
     network_mode: host
-    # GPUを使いたい場合は下のコメントを外す
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+
+    # 'deploy' セクションは削除する
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           capabilities: [all]
