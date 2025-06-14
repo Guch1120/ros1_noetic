@@ -8,7 +8,11 @@
 - 内容はflexbeのリポジトリのクローン・rosdepの初期化とアップデート・colcon build．
 ###  4.終了するとTerminator上でも指示が表示されるとおり，一度 Terminatorを左上の×印で閉じる．    
 - これで環境構築は完了．  
-- 以降はrun_docker.bashと同じディレクトリで```./run_docker.bash```で実行するとコンテナの起動とコンテナへのアクセス・Terminatorの起動までを行える．
+- 以降はrun_docker.bashと同じディレクトリで
+ ```
+./run_docker.bash
+```
+で実行するとコンテナの起動とコンテナへのアクセス・Terminatorの起動までを行える．
 
 
 # エラーとその解決法備忘録集
