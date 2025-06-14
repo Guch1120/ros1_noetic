@@ -26,6 +26,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libxcb-render-util0 \
     libxcb-xinerama0 \
     libxcb-cursor0 \
+    ros-humble-gazebo-* \
+    ros-humble-rqt-* \
     && rm -rf /var/lib/apt/lists/*
 
 RUN rm -f /etc/ros/rosdep/sources.list.d/20-default.list && rosdep init && rosdep update

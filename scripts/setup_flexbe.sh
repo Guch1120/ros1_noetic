@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "--- FlexBEワークスペースのセットアップを開始します ---"
+echo "--- FlexBE setup Start ---"
 
 WS_DIR=~/ros2_ws
 mkdir -p $WS_DIR/src
@@ -12,14 +12,14 @@ echo "--- 1. Cloning FlexBE repositories ---"
 if [ ! -d "src/flexbe_behavior_engine" ]; then
     git clone --branch humble https://github.com/FlexBE/flexbe_behavior_engine.git src/flexbe_behavior_engine
 else
-    echo "flexbe_behavior_engine は既に存在します。最新版に更新します..."
+    echo "flexbe_behavior_engine is already present. change branch for humble..."
     (cd src/flexbe_behavior_engine && git checkout humble && git pull)
 fi
 
 if [ ! -d "src/flexbe_app" ]; then
     git clone --branch humble https://github.com/FlexBE/flexbe_app.git src/flexbe_app
 else
-    echo "flexbe_app は既に存在します。最新版に更新します..."
+    echo "flexbe_app is already present. change branch for humble..."
     (cd src/flexbe_app && git checkout humble && git pull)
 fi
 
@@ -139,12 +139,18 @@ echo "Ensuring you own the workspace files..."
 sudo chown -R dockeruser:dockeruser ~/ros2_ws
 colcon build --symlink-install
 
-# --- 4. nwjsをインストール (パッチ済み) ---
+# --- 4. nwjsをインストール (patched) ---
 echo "--- 4. Installing nwjs ---"
 source $WS_DIR/install/setup.bash
 ros2 run flexbe_app nwjs_install
 
-echo ""
-echo "--- セットアップが完了しました！ ---"
-echo "次にコンテナに入ったときは、'bash scripts/launch_flexbe.sh' を実行してFlexBEを起動してください。"
+# --- 5. 環境設定を更新 ---
+echo "--- 5. Sourcing the workspace setup file ---"
+echo "source $WS_DIR/install/setup.bash" >> ~/.bashrc
+echo "export XDG_CONFIG_HOME=/tmp/.chromium" >> ~/.bashrc
+echo "export XDG_CACHE_HOME=/tmp/.chromium" >> ~/.bashrc
+source $WS_DIR/install/setup.bash
 
+echo ""
+echo "--- complete setup! ---"
+echo -e "\e[44;37m [Please]close terminator and run ./run_docker.bash at <HOST teminal>\e[0m\n"

@@ -1,41 +1,63 @@
 #!/bin/bash
-# set -e を外す。ros2 launchをCtrl+Cで終了したときにスクリプト全体が終わらないようにするため。
 
-echo "launch flexbe"
+echo "--- FlexBE ---"
 
-# ROS2 Humbleの環境設定を読み込む
-source /opt/ros/humble/setup.bash
-
-# ワークスペースの環境を読み込む
+# --- 環境設定 (一度だけ実行) ---
 if [ -f "/home/dockeruser/ros2_ws/install/setup.bash" ]; then
     source /home/dockeruser/ros2_ws/install/setup.bash
-else
-    echo "エラー: ros2_ws/install/setup.bash が見つかりません。"
-    echo "'bash scripts/setup_flexbe.sh' を先に実行しましたか？"
-    exit 1
 fi
-
-# nwjs (Chromium) のUIクラッシュを回避するための環境変数を設定
 export XDG_CONFIG_HOME=/tmp/.chromium
 export XDG_CACHE_HOME=/tmp/.chromium
 
-# --- 起動ループ ---
-# Ctrl+C (SIGINT) を無視して、ループが勝手に終わらないようにする
-trap '' INT
+echo -e "\e[32mready\e[0m\n"
 
+
+# --- 高度な終了処理 ---
+LAUNCH_PID=""
+
+cleanup() {
+    echo -e "\n\e[33m Detect Ctrl+C...\e[0m"
+    if [ -n "$LAUNCH_PID" ]; then
+        # Step 1: まずはSIGINTで、丁寧にお願いする
+        echo -n "  SIGINT..."
+        echo " id:${LAUNCH_PID}"
+        kill -SIGINT -- -"$LAUNCH_PID" 2>/dev/null
+        
+        # Step 2: 2秒待って、まだ生きてるか確認
+        sleep 2
+        # `ps`コマンドで、まだプロセスが存在するかどうかをチェック
+        if ps -p "$LAUNCH_PID" > /dev/null; then
+            # Step 3: まだ生きてたら、SIGKILLで強制的に終了させる
+            echo -n "  > SIGKILL..."
+            echo  "process id: "$LAUNCH_PID
+            kill -SIGKILL -- -"$LAUNCH_PID" 2>/dev/null
+        else
+            echo "  > all processes end"
+        fi
+    fi
+}
+
+trap cleanup INT
+
+
+# --- メインの起動ループ ---
 while true; do
-    # プロンプトメッセージ
-    read -p $'\e[32mEnterキーを押してFlexBEを起動 (終了するには \'end\' と入力):\e[0m ' input
-
-    # 'end' と入力されたらループを抜ける
+    read -p $'\e[32mPress Enter to launch FlexBE (type \'end\' to quit):\e[0m ' input
     if [[ "$input" == "end" ]]; then
         break
     fi
 
-    # FlexBEを起動
-    ros2 launch flexbe_app flexbe_full.launch.py
+    echo "Launching FlexBE..."
+    setsid ros2 launch flexbe_app flexbe_full.launch.py &
+    LAUNCH_PID=$!
+
+    wait "$LAUNCH_PID"
+    LAUNCH_PID=""
+
+    echo -e "\e[33mEnded FlexBE\e[0m\n"
 done
 
-# SIGINTのトラップをデフォルトに戻す
+
+# --- スクリプトの完全終了処理 ---
 trap - INT
-exec bash # FlexBE終了後、またはEnterを押さずにCtrl+Cなどで抜けた場合にシェルを起動
+echo "Finsish"
