@@ -1,14 +1,14 @@
 
 # 使い方
-### - 1.`ls`でdocker-compose.yamlと同じディレクトリであることを確認する．違うときは適宜`cd`で移動．  
-### - 2.`docker-compose up --build`でdockerのイメージをビルドしてコンテナ作成（up）させる．
+###  1.`ls`でdocker-compose.yamlと同じディレクトリであることを確認する．違うときは適宜`cd`で移動．    
+###  2.`docker-compose up --build`でdockerのイメージをビルドしてコンテナ作成（up）させる．  
 - 完了すると作成したコンテナに入るようになっている．
 - 実行するとTerminatorが起動し4つのウィンドウが存在する．
-### - 3.右下の Terminatorで`bash script/setup_flexbe.sh`を実行しflexbeの環境を構築する，
-  内容はflexbeのリポジトリのクローン・rosdepの初期化とアップデート・colcon build．
-### - 4.終了するとTerminator上でも指示が表示されるとおり，一度 Terminatorを左上の×印で閉じる．  
-これで環境構築は完了．  
-以降はrun_docker.bashと同じディレクトリで`./run_docker.bash`で実行するとコンテナの起動とコンテナへのアクセス・Terminatorの起動までを行える．
+###  3.右下の Terminatorで`bash script/setup_flexbe.sh`を実行しflexbeの環境を構築する，  
+- 内容はflexbeのリポジトリのクローン・rosdepの初期化とアップデート・colcon build．
+###  4.終了するとTerminator上でも指示が表示されるとおり，一度 Terminatorを左上の×印で閉じる．    
+- これで環境構築は完了．  
+- 以降はrun_docker.bashと同じディレクトリで`./run_docker.bash`で実行するとコンテナの起動とコンテナへのアクセス・Terminatorの起動までを行える．
 
 
 # エラーとその解決法備忘録集
