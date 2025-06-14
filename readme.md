@@ -1,3 +1,8 @@
+#用途
+ros2 humble環境のdockerコンテナであり，rviz・gazebo・flexbeをデフォルトで使用可能状態にしている．
+Terminaotr上でエンターキーを押すと起動し，Ctrl+Cで終了する．終了後再び待機状態となりエンターキーを再度押すと起動する．
+右下のTerminatorは何も起動していないただのTeminaotrなので任意のコマンドを実行可能．
+
 
 # 使い方
 ###  1.`ls`でdocker-compose.yamlと同じディレクトリであることを確認する．違うときは適宜`cd`で移動．    
