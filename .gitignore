@@ -1,3 +1,4 @@
 src/flexbe_app
 src/flexbe_behavior_engine
 librealsense
+scripts/__pycache__/my_realsense.launch.cpython-310.pyc

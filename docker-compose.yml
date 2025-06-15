@@ -5,8 +5,8 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
-    image: ros2-humble-dev
-    container_name: ros2_humble_dev_image
+    image: ros2-humble-dev-withcam
+    container_name: ros2_humble_dev_withcam_image
     tty: true
     stdin_open: true
     ipc: host
