@@ -28,7 +28,23 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libxcb-cursor0 \
     ros-humble-gazebo-* \
     ros-humble-rqt-* \
+    apt-transport-https \
+    software-properties-common  \
     && rm -rf /var/lib/apt/lists/*
+
+
+#realsense2 setup
+RUN mkdir -p /etc/apt/keyrings && \
+    curl -sSf https://librealsense.intel.com/Debian/librealsense.pgp | tee /etc/apt/keyrings/librealsense.pgp > /dev/null
+RUN echo "deb [signed-by=/etc/apt/keyrings/librealsense.pgp] https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/librealsense.list
+
+RUN apt-get update && apt-get install -y \
+    librealsense2-utils \
+    librealsense2-dev \
+    librealsense2-dbg \
+    ros-humble-realsense2-camera \
+    && rm -rf /var/lib/apt/lists/*
+#-------------------------------------------
 
 RUN rm -f /etc/ros/rosdep/sources.list.d/20-default.list && rosdep init && rosdep update
 

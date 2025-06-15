@@ -1,0 +1,16 @@
+# rtabmap_params.yaml の中身
+
+rgbd_odometry:
+  ros__parameters:
+    # オドメトリの計算方法 (0=Frame-to-Frame)
+    Odom/Strategy: 0
+    # 特徴点アルゴリズム (6=ORB)
+    Vis/FeatureType: 6
+    # 最低限必要な特徴点の数 (デフォルトは20)
+    Vis/MinInliers: 10
+
+rtabmap:
+  ros__parameters:
+    # rtabmapノード側でも同じ設定をしておく
+    Vis/FeatureType: 6
+    Vis/MinInliers: 10

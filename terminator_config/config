@@ -5,7 +5,6 @@
 [profiles]
   [[default]]
     cursor_color = "#aaaaaa"
-    # ターミナルが開いたときに、シェルのプロンプトを表示したままにする
     login_shell = True
 [layouts]
   [[default]]
@@ -23,8 +22,8 @@
     [[[child3]]]
       type = VPaned
       parent = child1
-
-      
+    
+    
     [[[terminal1]]]
       type = Terminal
       parent = child2
@@ -42,4 +41,83 @@
       type = Terminal
       parent = child3
       command = bash /home/dockeruser/scripts/launch_3.bash
+      profile = default
+  [[New Layout]]
+    [[[child0]]]
+      type = Window
+      parent = ""
+      order = 0
+      position = 1049:27
+      maximised = False
+      fullscreen = False
+      size = 1511, 1376
+      title = dockeruser@guch1-NUC11PAHi5: ~
+      last_active_term = c19f2478-9ea6-42e1-a7e7-62dbb66b18eb
+      last_active_window = True
+    [[[child1]]]
+      type = HPaned
+      parent = child0
+      order = 0
+      position = 764
+      ratio = 0.5073041168658698
+    [[[child2]]]
+      type = VPaned
+      parent = child1
+      order = 0
+      position = 699
+      ratio = 0.5098468271334792
+    [[[terminal3]]]
+      type = Terminal
+      parent = child2
+      order = 0
+      profile = default
+      uuid = b9a5dc65-2a14-4e8c-ac2f-02c80f920ec7
+    [[[terminal4]]]
+      type = Terminal
+      parent = child2
+      order = 1
+      profile = default
+      uuid = b2ad0523-49b6-4d46-a5a7-8585c79fd435
+    [[[child5]]]
+      type = VPaned
+      parent = child1
+      order = 1
+      position = 699
+      ratio = 0.5098468271334792
+    [[[terminal6]]]
+      type = Terminal
+      parent = child5
+      order = 0
+      profile = default
+      uuid = 198abbb2-c489-4b25-92bb-116d2666a951
+    [[[child7]]]
+      type = HPaned
+      parent = child5
+      order = 1
+      position = 361
+      ratio = 0.4898236092265943
+    [[[terminal8]]]
+      type = Terminal
+      parent = child7
+      order = 0
+      profile = default
+      uuid = 64e25793-33bf-4814-bf3a-e8379170f14d
+    [[[child9]]]
+      type = VPaned
+      parent = child7
+      order = 1
+      position = 334
+      ratio = 0.5007496251874063
+    [[[terminal10]]]
+      type = Terminal
+      parent = child9
+      order = 0
+      profile = default
+      uuid = c19f2478-9ea6-42e1-a7e7-62dbb66b18eb
+    [[[terminal11]]]
+      type = Terminal
+      parent = child9
+      order = 1
+      profile = default
+      uuid = 44d35652-30b3-4d4f-8494-c7fc57b82a54
 [plugins]

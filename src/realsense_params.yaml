@@ -1,0 +1,12 @@
+camera:
+  ros__parameters:
+    align_depth.enable: true
+    pointcloud.enable: true
+    initial_reset: true
+    depth_module.profile: '640x480x30'
+    rgb_camera.profile: '640x480x30'
+    depth_qos: "SENSOR_DATA"
+    color_qos: "SENSOR_DATA"
+    aligned_depth_to_color_qos: "SENSOR_DATA"
+    camera_info_qos: "SENSOR_DATA"
+    pointcloud.pointcloud_qos: "SENSOR_DATA"

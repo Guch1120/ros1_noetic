@@ -10,14 +10,18 @@ services:
     tty: true
     stdin_open: true
     ipc: host
+    privileged: true
 
     # NVIDIA GPU を使うための現在の推奨設定
     runtime: nvidia
-
     #AppArmorの制限をこのコンテナだけ解除
     security_opt:
       - "apparmor=unconfined"
-    
+    # USBデバイスへのアクセスを許可
+    devices:
+      - /dev:/dev
+
+
     volumes:
       # ホストのsrcディレクトリをコンテナのワークスペースのsrcにマウント
       - ./src:/home/dockeruser/ros2_ws/src
